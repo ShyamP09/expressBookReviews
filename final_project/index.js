@@ -11,8 +11,9 @@ app.use(express.json());
 app.use("/customer", session({ secret: "fingerprint_customer", resave: true, saveUninitialized: true }))
 
 app.use("/customer/auth/*", function auth(req, res, next) {
-    const token = req.session.token;
+    console.log(req.session); // Add this line to inspect the session
 
+    const token = req.session.token;
     if (!token) {
         return res.status(401).json({ message: "Access Denied: No Token Provided!" });
     }
